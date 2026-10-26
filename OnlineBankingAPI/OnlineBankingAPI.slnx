@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="OnlineBankingAPI.csproj" />
+  <Project Path="OnlineBankingAPI.Tests/OnlineBankingAPI.Tests.csproj" />
+</Solution>

@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.env*.local
+certs/
+coverage/
+playwright-report/
+test-results/
+.DS_Store
+tests/e2e/.auth/
+certificates/

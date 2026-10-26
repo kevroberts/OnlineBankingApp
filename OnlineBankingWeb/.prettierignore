@@ -1,0 +1,10 @@
+.next
+node_modules
+package-lock.json
+public/mockServiceWorker.js
+playwright-report
+test-results
+certs
+src/api/bankApi.generated.ts
+certificates
+tests/e2e/.auth

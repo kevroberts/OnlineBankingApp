@@ -1,0 +1,68 @@
+# Walkthrough of Alice's 200.00 transfer from checking to savings.
+# Run "login" first; later requests reuse its session token.
+@host = https://localhost:7294
+@api = {{host}}/api/v1
+
+# @name login
+POST {{api}}/auth/login
+Content-Type: application/json
+
+{ "username": "alice", "password": "Demo#2026" }
+
+###
+@token = {{login.response.body.$.sessionToken}}
+
+GET {{api}}/auth/me
+Authorization: Bearer {{token}}
+
+###
+GET {{api}}/accounts
+Authorization: Bearer {{token}}
+
+###
+GET {{api}}/accounts/a11ce000-0000-4000-8000-0000000000a1/transactions?pageSize=10&q=coffee
+Authorization: Bearer {{token}}
+
+###
+GET {{api}}/payees
+Authorization: Bearer {{token}}
+
+###
+# @name quote
+POST {{api}}/transfers/quotes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "sourceAccountId": "a11ce000-0000-4000-8000-0000000000a1",
+  "destination": { "kind": "account", "id": "a11ce000-0000-4000-8000-0000000000a2" },
+  "amount": 200.00,
+  "note": "Rainy day fund"
+}
+
+###
+# Send twice: the second response is replayed (Idempotent-Replayed: true) and moves no money.
+POST {{api}}/transfers
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Idempotency-Key: 6f1d2c3e-8b4a-4c1d-9e2f-0a1b2c3d4e5f
+
+{ "quoteId": "{{quote.response.body.$.quoteId}}" }
+
+###
+GET {{api}}/transfers?pageSize=5
+Authorization: Bearer {{token}}
+
+###
+# The assistant streams server-sent events; add "conversationId" from the first event to follow up.
+POST {{api}}/assistant/messages
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "text": "How much did I spend on groceries this month?" }
+
+###
+POST {{api}}/auth/logout
+Authorization: Bearer {{token}}
+
+###

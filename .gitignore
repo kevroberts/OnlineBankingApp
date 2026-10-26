@@ -1,0 +1,98 @@
+# OnlineBankingApp: root .gitignore for the whole solution
+#   OnlineBankingAPI  - ASP.NET Core (.NET 10), Visual Studio 2026, xUnit
+#   OnlineBankingWeb  - Next.js 16, npm 11, Vitest, Playwright
+# Keep tracked: package-lock.json, openapi.yaml, appsettings*.json, .env.example
+# Secrets live in dotnet user-secrets (outside the repo), not in files here.
+
+# ---------------------------------------------------------------------------
+# .NET / Visual Studio
+# ---------------------------------------------------------------------------
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]64/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio state and per-user settings
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+launchSettings.local.json
+
+# Test results and coverage
+[Tt]est[Rr]esults/
+*.trx
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+coverage*.info
+TestResult.xml
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+.nuget/
+
+# Publish output
+[Pp]ublish/
+PublishProfiles/*.pubxml.user
+*.azurePubxml
+
+# Rider / VS Code (personal editor settings)
+.idea/
+*.sln.iml
+.vscode/*
+!.vscode/extensions.json
+
+# ---------------------------------------------------------------------------
+# Node / Next.js (OnlineBankingWeb)
+# ---------------------------------------------------------------------------
+node_modules/
+.next/
+out/
+build/
+next-env.d.ts
+*.tsbuildinfo
+.turbo/
+.eslintcache
+npm-debug.log*
+.npm/
+
+# Env files: keep .env.example, ignore local overrides
+.env*.local
+.env
+
+# Local HTTPS dev certificates (next dev --experimental-https)
+certificates/
+certs/
+
+# Vitest / Playwright
+coverage/
+playwright-report/
+blob-report/
+test-results/
+playwright/.cache/
+tests/e2e/.auth/
+
+# ---------------------------------------------------------------------------
+# OS and misc
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.swp
+*~
+*.tmp
+*.log
